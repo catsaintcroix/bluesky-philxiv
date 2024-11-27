@@ -5,7 +5,7 @@ import os
 from tqdm.contrib.concurrent import thread_map
 from atproto_client.models.app.bsky.feed.defs import FeedViewPost
 from atproto_client.models.app.bsky.richtext.facet import Link
-from datetime import datetime
+from datetime import datetime, timezone
 from pyarxiv import query
 
 
@@ -19,7 +19,7 @@ def write_json(data, path):
 
 
 def parse_date(date_string):
-    return datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%S.%fZ")
+    return datetime.fromisoformat(date_string.replace("Z", "+00:00"))
 
 
 def is_ml_preprint(arxiv_url: str):
@@ -53,7 +53,9 @@ def parse_arxiv_urls(item: FeedViewPost):
 
 
 def hackernews_score(item, gravity: float = 2.5):
-    hours_passed = (datetime.now() - parse_date(item.post.indexed_at)).seconds / 3600
+    hours_passed = (
+        datetime.now(timezone.utc) - parse_date(item.post.indexed_at)
+    ).total_seconds() / 3600
     if hours_passed >= 12:
         return 0
     else:
