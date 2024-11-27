@@ -117,7 +117,12 @@ def fetch_latest_posts():
     )
 
     feed = data.feed
-    # next_page = data.cursor
+    for _ in range(1):
+        data = client.app.bsky.feed.get_feed(
+            {"feed": SKYFEED_PATH, "limit": 100, "cursor": data.cursor},
+            timeout=200,
+        )
+        feed.extend(data.feed)
 
     bool_filter = thread_map(filter_item, feed)
     filtered_feed = compress(feed, bool_filter)
