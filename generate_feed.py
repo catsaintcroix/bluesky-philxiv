@@ -51,7 +51,7 @@ def parse_arxiv_urls(item: FeedViewPost):
         return arxiv_urls
 
 
-def hackernews_score(item, gravity: float = 2):
+def hackernews_score(item, gravity: float = 2.5):
     hours_passed = (datetime.now() - parse_date(item.post.indexed_at)).seconds / 3600
     points = (
         item.post.like_count
@@ -64,13 +64,19 @@ def hackernews_score(item, gravity: float = 2):
 
 
 def rank_posts(feed):
-    return sorted(feed, key=lambda item: parse_date(item.post.indexed_at), reverse=True)
-    # return sorted(feed, key=hackernews_score, reverse=True)
+    # return sorted(feed, key=lambda item: parse_date(item.post.indexed_at), reverse=True)
+    return sorted(feed, key=hackernews_score, reverse=True)
 
 
 def filter_item(item: FeedViewPost) -> bool:
     if item.post.author.handle.startswith(
-        ("arxiv-cs-", "arxiv-stat-", "paperposterbot.bsky.social", "optb0t.bsky.social")
+        (
+            "arxiv-cs-",
+            "arxiv-stat-",
+            "paperposterbot.bsky.social",
+            "optb0t.bsky.social",
+            "ericzzj.bsky.social",
+        )
     ):
         return False
 
