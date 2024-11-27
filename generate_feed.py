@@ -54,14 +54,17 @@ def parse_arxiv_urls(item: FeedViewPost):
 
 def hackernews_score(item, gravity: float = 2.5):
     hours_passed = (datetime.now() - parse_date(item.post.indexed_at)).seconds / 3600
-    points = (
-        item.post.like_count
-        + item.post.quote_count
-        + item.post.reply_count
-        + item.post.repost_count
-    )
-    score = points / ((hours_passed + 2) ** (gravity))
-    return score
+    if hours_passed >= 12:
+        return 0
+    else:
+        points = (
+            item.post.like_count
+            + item.post.quote_count
+            + item.post.reply_count
+            + item.post.repost_count
+        )
+        score = points / ((hours_passed + 2) ** (gravity))
+        return score
 
 
 def rank_posts(feed):
