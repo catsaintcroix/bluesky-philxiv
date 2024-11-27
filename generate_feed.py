@@ -32,6 +32,7 @@ def is_ml_preprint(arxiv_url: str):
         entry = entries[0]
         return entry["arxiv_primary_category"]["term"]
 
+    # Reference: https://arxiv.org/category_taxonomy
     ALLOWED_CATEGORIES = ["cs.AI", "cs.CL", "cs.CV", "cs.LG", "cs.MA"]
     arxiv_id = arxiv_url.split("/")[-1].split("#")[0].split("v")[0].replace(".pdf", "")
     primary_category = _get_arxiv_category(arxiv_id)
@@ -63,13 +64,13 @@ def hackernews_score(item, gravity: float = 2):
 
 
 def rank_posts(feed):
-    # return sorted(feed, key=lambda item: parse_date(item.post.indexed_at), reverse=True)
-    return sorted(feed, key=hackernews_score, reverse=True)
+    return sorted(feed, key=lambda item: parse_date(item.post.indexed_at), reverse=True)
+    # return sorted(feed, key=hackernews_score, reverse=True)
 
 
 def filter_item(item: FeedViewPost) -> bool:
     if item.post.author.handle.startswith(
-        ("arxiv-cs-", "arxiv-stat-", "paperposterbot.bsky.social")
+        ("arxiv-cs-", "arxiv-stat-", "paperposterbot.bsky.social", "optb0t.bsky.social")
     ):
         return False
 
