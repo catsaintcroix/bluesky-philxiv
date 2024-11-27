@@ -26,10 +26,10 @@ def is_ml_preprint(arxiv_url: str):
 
     def _get_arxiv_category(arxiv_id: str):
         entries = query(querystring=f"id:{arxiv_id}")
-        entry = entries[0]
-        if not entry:
+        if not entries:
             print(f"Missing arxiv id: {arxiv_id}")
             return None
+        entry = entries[0]
         return entry["arxiv_primary_category"]["term"]
 
     ALLOWED_CATEGORIES = ["cs.AI", "cs.CL", "cs.CV", "cs.LG", "cs.MA"]
