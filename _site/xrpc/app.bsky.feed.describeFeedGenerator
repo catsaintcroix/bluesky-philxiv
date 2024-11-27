@@ -1,0 +1,11 @@
+{
+    "encoding": "application/json",
+    "body": {
+        "did": "did:web:bluesky-1tj.pages.dev",
+        "feeds": [
+            {
+                "uri": "at://did:plc:bpuq5cgmyvssgi3iwsyvd4gn/app.bsky.feed.generator/arxiv-feed"
+            }
+        ]
+    }
+}

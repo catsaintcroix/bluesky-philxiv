@@ -1,0 +1,6 @@
+# This is a comment
+/xrpc/*
+  Content-Type: application/json
+
+/.well-known/*
+  Content-Type: application/json
