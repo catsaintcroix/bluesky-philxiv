@@ -33,7 +33,8 @@ def is_ml_preprint(arxiv_url: str):
         return entry["arxiv_primary_category"]["term"]
 
     # Reference: https://arxiv.org/category_taxonomy
-    ALLOWED_CATEGORIES = ["cs.AI", "cs.CL", "cs.CV", "cs.LG", "cs.MA"]
+    # "cs.LG"
+    ALLOWED_CATEGORIES = ["cs.AI", "cs.CL", "cs.CV", "cs.MA"]
     arxiv_id = arxiv_url.split("/")[-1].split("#")[0].split("v")[0].replace(".pdf", "")
     primary_category = _get_arxiv_category(arxiv_id)
     return primary_category in ALLOWED_CATEGORIES
