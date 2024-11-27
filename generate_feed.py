@@ -119,7 +119,7 @@ def fetch_latest_posts():
     )
 
     feed = data.feed
-    for _ in range(1):
+    for _ in range(2):
         data = client.app.bsky.feed.get_feed(
             {"feed": SKYFEED_PATH, "limit": 100, "cursor": data.cursor},
             timeout=200,
