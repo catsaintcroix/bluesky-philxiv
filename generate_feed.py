@@ -25,7 +25,11 @@ def parse_date(date_string):
 def is_ml_preprint(arxiv_url: str):
 
     def _get_arxiv_category(arxiv_id: str):
-        entries = query(querystring=f"id:{arxiv_id}")
+        try:
+            entries = query(querystring=f"id:{arxiv_id}")
+        except Exception as err:
+            print(f"Error for {arxiv_url} and {arxiv_id}")
+            return None
         if not entries:
             print(f"Missing arxiv id: {arxiv_id}")
             return None
@@ -35,7 +39,13 @@ def is_ml_preprint(arxiv_url: str):
     # Reference: https://arxiv.org/category_taxonomy
     # "cs.LG"
     ALLOWED_CATEGORIES = ["cs.AI", "cs.CL", "cs.CV", "cs.MA"]
-    arxiv_id = arxiv_url.split("/")[-1].split("#")[0].split("v")[0].replace(".pdf", "")
+    arxiv_id = (
+        arxiv_url.split("/")[-1]
+        .replace(".pdf", "")
+        .split("#")[0]
+        .split("v")[0]
+        .split("?")[0]
+    )
     primary_category = _get_arxiv_category(arxiv_id)
     return primary_category in ALLOWED_CATEGORIES
 
