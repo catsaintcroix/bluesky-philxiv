@@ -5,42 +5,34 @@
 # pip3 install atproto
 
 from atproto import Client, models
-import os
 from textwrap import dedent
+import config
 
 # YOUR bluesky handle
 # Ex: user.bsky.social
-HANDLE: str = "amitness.com"
+HANDLE: str = config.HANDLE
 
 # YOUR bluesky password, or preferably an App Password (found in your client settings)
 # Ex: abcd-1234-efgh-5678
-PASSWORD = os.environ["BLUESKY_APP_PASSWORD"]
+PASSWORD = config.PASSWORD
 
 
 # The hostname of the server where feed server will be hosted
 # Ex: feed.bsky.dev
-HOSTNAME: str = "bluesky-1tj.pages.dev"
+HOSTNAME: str = config.SERVICE_DOMAIN
 
 # A short name for the record that will show in urls
 # Lowercase with no spaces.
 # Ex: whats-hot
-RECORD_NAME: str = "arxiv-feed"
+RECORD_NAME: str = config.RECORD_NAME
 
 # A display name for your feed
 # Ex: What's Hot
-DISPLAY_NAME: str = "Papers"
+DISPLAY_NAME: str = config.DISPLAY_NAME
 
 # (Optional) A description of your feed
 # Ex: Top trending content from the whole network
-DESCRIPTION: str = dedent(
-    """
-    Latest ML research papers and preprints from arxiv.org discussed on Bluesky.
-    
-    Logic:
-    - Fetch arxiv preprints & filters out non-ML via arxiv API
-    - Ranks the items using hackernews algorithm
-    """
-).strip()
+DESCRIPTION: str = config.DESCRIPTION
 
 # (Optional) The path to an image to be used as your feed's avatar
 # Ex: ./path/to/avatar.jpeg
@@ -85,7 +77,7 @@ def main():
     )
 
     print("Successfully published!")
-    print('Feed URI (set in "FEED_URI" in `generate_feed.py`):', response.uri)
+    print("Set the FEED_URI variable in config.py to this value", response.uri)
 
 
 if __name__ == "__main__":
