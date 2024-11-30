@@ -7,6 +7,9 @@ HANDLE = "amitness.com"
 # Bluesky app password, available via: https://bsky.app/settings/app-passwords
 PASSWORD = os.environ["BLUESKY_APP_PASSWORD"]
 
+# Domain provided by Cloudflare pages
+SERVICE_DOMAIN = "bluesky-1tj.pages.dev"
+
 ## Feed Details
 
 # A short name for the record that will show in urls
@@ -29,9 +32,6 @@ DESCRIPTION: str = dedent(
     - Ranks the items using hackernews algorithm
     """
 ).strip()
-
-# Domain provided by Cloudflare pages
-SERVICE_DOMAIN = "bluesky-1tj.pages.dev"
 
 SERVICE_DID = f"did:web:{SERVICE_DOMAIN}"
 
