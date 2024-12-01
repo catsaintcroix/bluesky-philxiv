@@ -39,6 +39,6 @@ SERVICE_DID = f"did:web:{SERVICE_DOMAIN}"
 FEED_URI = "at://did:plc:bpuq5cgmyvssgi3iwsyvd4gn/app.bsky.feed.generator/arxiv-feed"
 
 # Skyfeed path
-SKYFEED_PATH = (
-    "at://did:plc:bpuq5cgmyvssgi3iwsyvd4gn/app.bsky.feed.generator/aaagg56kp5qzi"
-)
+SKYFEED_DID = "did:plc:bpuq5cgmyvssgi3iwsyvd4gn/feed/aaagg56kp5qzi"
+
+SKYFEED_PATH = f"at://{SKYFEED_DID}".replace("/feed/", "/app.bsky.feed.generator/")
