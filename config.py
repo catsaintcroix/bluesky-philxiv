@@ -2,34 +2,35 @@ import os
 from textwrap import dedent
 
 # Bluesky username
-HANDLE = "amitness.com"
+HANDLE = "catsaintcroix.bsky.social"
 
 # Bluesky app password, available via: https://bsky.app/settings/app-passwords
 PASSWORD = os.environ["BLUESKY_APP_PASSWORD"]
 
 # Domain provided by Cloudflare pages
-SERVICE_DOMAIN = "bluesky-1tj.pages.dev"
+SERVICE_DOMAIN = "bluesky-8x1.pages.dev"
 
 ## Feed Details
 
 # A short name for the record that will show in urls
 # Lowercase with no spaces.
 # Ex: whats-hot
-RECORD_NAME: str = "arxiv-feed"
+RECORD_NAME: str = "philxiv"
 
 # A display name for your feed
 # Ex: What's Hot
-DISPLAY_NAME: str = "Papers"
+DISPLAY_NAME: str = "Philosophy Papers!"
 
 # (Optional) A description of your feed
 # Ex: Top trending content from the whole network
 DESCRIPTION: str = dedent(
     """
-    Latest ML research papers and preprints from arxiv.org discussed on Bluesky.
+    Philosophy Journals and Papers on Bsky
     
     Logic:
-    - Fetch arxiv preprints & filters out non-ML via arxiv API
-    - Ranks the items using hackernews algorithm
+    - Posts from Philosophy Journals
+    - Posts linking to PhilPapers
+    - Ranked by HackerNews.
     """
 ).strip()
 
@@ -39,6 +40,6 @@ SERVICE_DID = f"did:web:{SERVICE_DOMAIN}"
 FEED_URI = "at://did:plc:bpuq5cgmyvssgi3iwsyvd4gn/app.bsky.feed.generator/arxiv-feed"
 
 # Skyfeed path
-SKYFEED_DID = "did:plc:bpuq5cgmyvssgi3iwsyvd4gn/feed/aaagg56kp5qzi"
+SKYFEED_DID = "did:plc:eryhawnypbe63pug5yn6aflw/feed/aaab4c2fn5ru4"
 
 SKYFEED_PATH = f"at://{SKYFEED_DID}".replace("/feed/", "/app.bsky.feed.generator/")
