@@ -129,9 +129,9 @@ def fetch_latest_posts():
         )
         feed.extend(data.feed)
 
-    bool_filter = thread_map(filter_item, feed)
-    filtered_feed = compress(feed, bool_filter)
-    sorted_feed = rank_posts(filtered_feed)
+   # bool_filter = thread_map(filter_item, feed)
+  #  filtered_feed = compress(feed, bool_filter)
+    sorted_feed = rank_posts(feed)
     post_uris = [item.post.uri for item in sorted_feed]
     return post_uris
 
